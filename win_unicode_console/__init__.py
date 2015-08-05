@@ -1,15 +1,14 @@
-from .info import check_Windows, PY2
-
-if PY2:
-    from . import raw_input
-
 try:
     from win_unicode_console import streams, console, readline_hook
 except (AttributeError, ImportError):
     enable = lambda **kw: None
     disable = lambda: None
 else:
+    from .info import check_Windows, PY2
+
     check_Windows()
+    if PY2:
+        from . import raw_input
 
     # PY3 # def enable(*,
     def enable(
