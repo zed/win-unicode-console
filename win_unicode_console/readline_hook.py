@@ -7,8 +7,6 @@ import warnings
 from ctypes import (pythonapi, cdll, cast, 
 	c_char_p, c_void_p, c_size_t, CFUNCTYPE)
 
-from .info import WINDOWS
-
 try:
 	import pyreadline
 except ImportError:
@@ -19,7 +17,7 @@ PyMem_Malloc = pythonapi.PyMem_Malloc
 PyMem_Malloc.restype = c_size_t
 PyMem_Malloc.argtypes = [c_size_t]
 
-strncpy = cdll.msvcrt.strncpy if WINDOWS else cdll["libc.so.6"].strncpy
+strncpy = cdll.msvcrt.strncpy
 strncpy.restype = c_char_p
 strncpy.argtypes = [c_char_p, c_char_p, c_size_t]
 
